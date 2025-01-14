@@ -195,15 +195,38 @@ class FacebookMessageProcessor:
             logging.error(f"Error in main processing: {str(e)}")
 
 def main():
-    # Set up logging
-    setup_logging()
+    import argparse
     
-    # Get the current directory
-    current_dir = os.getcwd()
-    logging.info(f"Starting processing in directory: {current_dir}")
+    # Set up argument parser
+    parser = argparse.ArgumentParser(
+        description='Process Facebook chat history files.',
+        usage='%(prog)s directory_path'
+    )
+    parser.add_argument(
+        'directory',
+        nargs='?',
+        default='.',
+        help='Directory containing the messages/inbox folder (default: current directory)'
+    )
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Convert to absolute path
+    working_dir = os.path.abspath(args.directory)
+    
+    # Verify directory exists
+    if not os.path.exists(working_dir):
+        print(f"Error: Directory not found: {working_dir}")
+        return
+    
+    # Set up logging
+    setup_logging(os.path.join(working_dir, 'logs'))
+    
+    logging.info(f"Starting processing in directory: {working_dir}")
     
     # Create processor instance and run
-    processor = FacebookMessageProcessor(current_dir)
+    processor = FacebookMessageProcessor(working_dir)
     processor.process_all()
 
 if __name__ == "__main__":
