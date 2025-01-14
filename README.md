@@ -17,15 +17,10 @@ A Python script for processing Facebook chat history files, specifically designe
 
 ## Installation
 
-1. Clone this repository or download the script:
+Clone this repository or download the script:
 ```bash
 git clone [your-repository-url]
 cd [repository-name]
-```
-
-2. Install required packages:
-```bash
-pip install -r requirements.txt
 ```
 
 ## Directory Structure
