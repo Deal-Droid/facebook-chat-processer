@@ -182,7 +182,7 @@ class FacebookMessageProcessor:
             for thai_file in thai_files:
                 if simplified_file := self.step2_simplify_chat(thai_file):
                     simplified_files.append(simplified_file)
-            
+
             # Step 3: Create summary
             logging.info("Starting Step 3: Creating summary")
             if summary_file := self.step3_summary_chat(simplified_files):
